@@ -1,9 +1,9 @@
-const dotenv = require('dotenv')
-dotenv.config();
+
 const express = require('express');
 const cors = require('cors');
 const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
+const routesEvenements = require('./routes/evenements.routes');
 
 const swaggerOptions = swaggerJsdoc({
     definition: {
@@ -29,6 +29,8 @@ const PORT = process.env.PORT || 3000;
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerOptions));
 
 app.use(cors({ origin: 'http://localhost:5173' }));
+
+app.use('/api/event',routesEvenements)
 
 
 app.listen(PORT, () => {
