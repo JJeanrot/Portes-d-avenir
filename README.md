@@ -1,38 +1,129 @@
-# portes_d_avenir
+# 🚪 Portes d'avenir
 
-This template should help get you started developing with Vue 3 in Vite.
+> Site web d'annonce des événements de **portes ouvertes** de l'**IUT Belfort-Montbéliard**.
 
-## Recommended IDE Setup
+Projet universitaire réalisé en groupe par 4 étudiants. Le site permet de consulter les événements de portes ouvertes de l'IUT (dates, lieux, informations pratiques) afin d'aider les futurs étudiants à découvrir l'établissement et ses formations.
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+![Statut](https://img.shields.io/badge/statut-en%20développement-orange)
+![Vue.js](https://img.shields.io/badge/frontend-Vue.js-42b883)
+![Node.js](https://img.shields.io/badge/backend-Node.js-339933)
 
-## Recommended Browser Setup
+---
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+## 📌 Sommaire
 
-## Customize configuration
+1. [Présentation](#-présentation)
+2. [Technologies utilisées](#-technologies-utilisées)
+3. [Prérequis](#-prérequis)
+4. [Installation et lancement](#-installation-et-lancement)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+---
 
-## Project Setup
+## 🎯 Présentation
 
-```sh
-npm install
+**Portes d'avenir** est une application web qui centralise les informations sur les journées portes ouvertes de l'IUT Belfort-Montbéliard.
+
+Objectifs du projet :
+
+- Présenter les prochains événements de portes ouvertes de manière claire et attractive
+- Faciliter l'accès aux informations pour les lycéens, étudiants et parents
+- Proposer une architecture moderne séparant le **frontend** (interface) et le **backend** (API / serveur)
+
+---
+
+## 🛠 Technologies utilisées
+
+| Partie       | Technologies                                  |
+|--------------|-----------------------------------------------|
+| **Frontend** | [Vue.js 3](https://vuejs.org/), [Vite](https://vitejs.dev/), Vue Router, store (état global) |
+| **Backend**  | [Node.js](https://nodejs.org/), serveur dans `server.js`, middlewares |
+| **Outils**   | Git / GitHub, npm, mariadb            |
+
+---
+
+
+
+---
+
+## ✅ Prérequis
+
+Avant de commencer, assurez-vous d'avoir installé :
+
+- [**Node.js**](https://nodejs.org/) (version 18 ou supérieure recommandée) — npm est inclus
+- [**Git**](https://git-scm.com/)
+
+Vérification :
+
+```bash
+node -v
+npm -v
+git --version
 ```
 
-### Compile and Hot-Reload for Development
+---
 
-```sh
+## 🚀 Installation et lancement
+
+> ⚠️ **Important :** le backend et le frontend **ne sont pas encore connectés**. Ils se lancent donc **séparément**, dans deux terminaux différents.
+
+### 1. Cloner le dépôt
+
+```bash
+git clone https://github.com/JJeanrot/Portes-d-avenir.git
+cd Portes-d-avenir
+```
+
+### 2. Lancer le frontend (Vue.js)
+
+```bash
+cd frontend
+npm install
 npm run dev
 ```
 
-### Compile and Minify for Production
+Le site est alors accessible sur l'adresse affichée dans le terminal (par défaut : **http://localhost:5173**).
 
-```sh
-npm run build
+Autres commandes utiles :
+
+```bash
+npm run build     # Génère la version de production dans /dist
+npm run preview   # Prévisualise la version de production
 ```
+
+### 3. Lancer le backend (Node.js)
+
+Dans un **second terminal**, depuis la racine du projet :
+
+```bash
+cd backend
+npm install
+node server.js
+```
+
+> 💡 Si un script `start` ou `dev` est défini dans `backend/package.json`, vous pouvez utiliser `npm start` ou `npm run dev` à la place.
+
+Le port d'écoute du serveur est défini dans `server.js`.
+
+### 4. Récapitulatif
+
+| Service   | Dossier     | Installation   | Lancement         | Adresse                |
+|-----------|-------------|----------------|-------------------|------------------------|
+| Frontend  | `frontend/` | `npm install`  | `npm run dev`     | http://localhost:5173  |
+| Backend   | `backend/`  | `npm install`  | `node server.js`  | selon `server.js`      |
+
+---
+
+## 👥 Équipe
+
+Projet réalisé dans le cadre d'un cursus à l'**IUT Belfort-Montbéliard** par :
+
+- **Jules JEANROT**
+- **Pierre LAMOUR**
+- **Guilian LEVEQUE**
+- **Landry LECROSNIER**
+
+---
+
+## 📄 Licence
+
+Projet universitaire à but pédagogique.
