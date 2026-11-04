@@ -97,10 +97,9 @@ Dans un **second terminal**, depuis la racine du projet :
 ```bash
 cd backend
 npm install
-node server.js
+npm start
 ```
 
-> 💡 Si un script `start` ou `dev` est défini dans `backend/package.json`, vous pouvez utiliser `npm start` ou `npm run dev` à la place.
 
 Le port d'écoute du serveur est défini dans `server.js`.
 
