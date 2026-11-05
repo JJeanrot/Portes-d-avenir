@@ -1,7 +1,7 @@
 import LocalSource from "@/services/localsource.service.js";
 
 async function getEvenementsFromLocalSource() {
-    return LocalSource.getEvenements;
+    return LocalSource.getEvenements();
 }
 
 
@@ -15,4 +15,4 @@ async function getEvenements() {
     }
     return response
 }
-
+export default { getEvenements }
