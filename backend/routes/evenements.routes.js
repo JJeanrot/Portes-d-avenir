@@ -47,6 +47,6 @@ const router = express.Router();
  *       500:
  *         description: Server error (e.g. database unreachable)
  */
-router.get('/',controleur.listEvent)
+router.get('/',controleur.getEvenements)
 
 module.exports = router

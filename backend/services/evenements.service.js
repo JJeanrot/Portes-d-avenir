@@ -5,7 +5,7 @@ const COLLUMN = "SELECT e.id_evenement, e.nom as nom_evenement, e.image, e.date_
 
 
 // return all the active event from the database
-async function listEvent(){
+async function getEvenements(){
     try{
         return await pool.query(COLLUMN)
     } catch (err) {
@@ -14,4 +14,4 @@ async function listEvent(){
 }
 
 
-module.exports = { listEvent }
+module.exports = { getEvenements }
