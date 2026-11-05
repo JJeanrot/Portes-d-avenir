@@ -51,11 +51,15 @@ const router = express.Router();
  *     CreateDepartementInput:
  *       type: object
  *       required:
- *         - nom_departement
+ *         - nom
+ *         - address
  *       properties:
- *         nom_departement:
+ *         nom:
  *           type: string
  *           example: Réseaux & Télécoms
+ *         address:
+ *           type: string
+ *           example: 15 rue des fibres Monbéliard
  */
 
 /**
@@ -77,8 +81,13 @@ const router = express.Router();
  *                 $ref: '#/components/schemas/Event'
  *       500:
  *         description: Erreur serveur (ex. base de données inaccessible).
- *
- *   post:
+ */
+router.get('/', controleur.getEvenements);
+
+/**
+ * @openapi
+ * /api/event:
+ *    post:
  *     summary: Créer un événement
  *     description: Ajoute un nouvel événement dans la base de données.
  *     tags:
@@ -108,7 +117,6 @@ const router = express.Router();
  *       500:
  *         description: Erreur serveur.
  */
-router.get('/', controleur.getEvenements);
 router.post('/', controleur.createEvent);
 
 /**
