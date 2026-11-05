@@ -9,5 +9,24 @@ function listEvent(req,res,next) {
         .catch(next)
 }
 
+function createEvent(req, res, next) {
+    service.createEvent(req.body)
+        .then((result) => res.status(201).json(result))
+        .catch(next);
+}
 
-module.exports = {listEvent}
+function delEvent(req, res, next) {
+    const { id } = req.params;
+
+    service.delEvent(id)
+        .then((result) => res.json({ message: "Événement supprimé", result }))
+        .catch(next);
+}
+
+function createDepartement(req, res, next) {
+    service.createDepartement(req.body)
+        .then((result) => res.status(201).json(result))
+        .catch(next);
+}
+
+module.exports = {listEvent, createEvent, delEvent, createDepartement};

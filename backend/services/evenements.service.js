@@ -13,5 +13,30 @@ async function listEvent(){
     }
 }
 
+async function delEvent(idEvent){
+    let conn
+    try{
+        conn = await pool.getConnection()
+        const query = "delete from evenement WHERE id_evenement = ?";
+        return await conn.query(query, [idEvent])
+    } catch (err) {
+        throw err
+    } finally {
+        if (conn) await conn.release();
+    }
+}
 
-module.exports = { listEvent }
+async function createEvent(eventData) {
+    const { nom, image, date_event, departement_id } = eventData;
+    const query = "INSERT INTO evenement (nom, image, date_event, departement_id) VALUES (?, ?, ?, ?)";
+    return await pool.query(query, [nom, image, date_event, departement_id]);
+}
+
+async function createDepartement(deptData) {
+    const { nom, address } = deptData;
+    const query = "INSERT INTO departement (nom, address) VALUES (?, ?)";
+    return await pool.query(query, [nom, address]);
+}
+
+
+module.exports = { listEvent, delEvent, createEvent, createDepartement };
