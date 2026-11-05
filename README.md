@@ -35,7 +35,7 @@ Objectifs du projet :
 
 | Partie       | Technologies                                  |
 |--------------|-----------------------------------------------|
-| **Frontend** | [Vue.js 3](https://vuejs.org/), [Vite](https://vitejs.dev/), Vue Router, store (état global) |
+| **Frontend** | [Vue.js](https://vuejs.org/), [Vite](https://vitejs.dev/), Vue Router, store (état global) |
 | **Backend**  | [Node.js](https://nodejs.org/), serveur dans `server.js`, middlewares |
 | **Outils**   | Git / GitHub, npm, mariadb            |
 

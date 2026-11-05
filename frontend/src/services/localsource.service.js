@@ -1,16 +1,16 @@
 import { departements, evenements } from "@/datasource/data.js"
 
 function getAllDepartements() {
-    return {errors: 0, data: departements};
+    return {error: 0, data: departements};
 }
 
 function getEvenements() {
-    return {errors: 0, data: evenements}
+    return {error: 0, data: evenements}
 }
 
 
 
 
 export default {
-    getAllDepartements
+    getAllDepartements ,getEvenements
 }
