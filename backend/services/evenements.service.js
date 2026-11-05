@@ -14,27 +14,38 @@ async function getEvenements(){
 }
 
 async function delEvent(idEvent) {
-    const query = "DELETE FROM evenement WHERE id_evenement = ?";
-    return await pool.query(query, [idEvent]);
+    try {
+        const query = "DELETE FROM evenement WHERE id_evenement = ?";
+        return await pool.query(query, [idEvent]);
+    }catch(err){
+        throw err
+    }
 }
 
 async function createEvent(eventData) {
-    const nom = eventData.nom || eventData.nom_evenement;
-    const image = eventData.image;
-    const departement_id = eventData.departement_id || eventData.id_departement;
-    const formattedDate = eventData.date_event
-        ? new Date(eventData.date_event).toISOString().slice(0, 19).replace('T', ' ')
-        : null;
-    const query = "INSERT INTO evenement (nom, image, date_event, departement_id) VALUES (?, ?, ?, ?)";
-    return await pool.query(query, [nom, image, formattedDate, departement_id]);
+    try {
+        const nom = eventData.nom || eventData.nom_evenement;
+        const image = eventData.image;
+        const departement_id = eventData.departement_id || eventData.id_departement;
+        const formattedDate = eventData.date_event
+            ? new Date(eventData.date_event).toISOString().slice(0, 19).replace('T', ' ')
+            : null;
+        const query = "INSERT INTO evenement (nom, image, date_event, departement_id) VALUES (?, ?, ?, ?)";
+        return await pool.query(query, [nom, image, formattedDate, departement_id]);
+    }catch(err){
+        throw err
+    }
 
 }
 
 async function createDepartement(deptData) {
-    const { nom, address } = deptData;
-    const query = "INSERT INTO departement (nom, address) VALUES (?, ?)";
-    return await pool.query(query, [nom, address]);
+    try {
+        const {nom, address} = deptData;
+        const query = "INSERT INTO departement (nom, address) VALUES (?, ?)";
+        return await pool.query(query, [nom, address]);
+    }catch(err){
+        throw err
+    }
 }
-
 
 module.exports = { getEvenements, delEvent, createEvent, createDepartement };
