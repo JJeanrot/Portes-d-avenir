@@ -8,13 +8,17 @@
 
 import {onMounted} from "vue";
 import {useDepartementStore} from "@/stores/departement.js";
+import {useEvenementsStore} from "@/stores/evenements.js";
 
 const departementStore = useDepartementStore();
+const evenementsStore = useEvenementsStore();
 
 onMounted(() => {
     departementStore.getDepartements();
+    evenementsStore.getEvenements();
 })
 
 </script>
+
 
 <style scoped></style>
