@@ -3,6 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "team": {
+    "member": [
+      "Pierre LAMOUR",
+      "Landry LECROSNIER",
+      "Jules JEANROT",
+      "Guilian LEVEQUE"
+    ],
+    "depot_github": "https://github.com/JJeanrot/Portes-d-avenir"
+  },
   "scripts": {
     "dev": "vite",
     "build": "vite build",
