@@ -27,6 +27,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+BigInt.prototype.toJSON = function() { return Number(this); };
 app.use(cors({ origin: 'http://localhost:5173' }));
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerOptions));
