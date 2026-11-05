@@ -6,16 +6,10 @@ const COLLUMN = "SELECT e.id_evenement, e.nom as nom_evenement, e.image, e.date_
 
 // return all the active event from the database
 async function listEvent(){
-    let conn
     try{
-        conn = await pool.getConnection()
-        const event = await conn.query(COLLUMN)
-        console.log(event)
-        return event
+        return await pool.query(COLLUMN)
     } catch (err) {
         throw err
-    } finally {
-        if (conn) await conn.end()
     }
 }
 
