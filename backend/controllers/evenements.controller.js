@@ -29,4 +29,4 @@ function createDepartement(req, res, next) {
         .catch(next);
 }
 
-module.exports = {listEvent, createEvent, delEvent, createDepartement};
+module.exports = {getEvenements, createEvent, delEvent, createDepartement};
