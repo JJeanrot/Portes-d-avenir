@@ -32,6 +32,7 @@ app.use(cors({ origin: 'http://localhost:5173' }));
 
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerOptions));
 
+
 app.use(cors({ origin: 'http://localhost:5173' }));
 
 app.use('/api/event',routesEvenements)
