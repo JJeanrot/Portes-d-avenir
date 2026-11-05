@@ -16,13 +16,10 @@ async function getEvenements(){
 async function delEvent(idEvent){
     let conn
     try{
-        conn = await pool.getConnection()
         const query = "delete from evenement WHERE id_evenement = ?";
         return await conn.query(query, [idEvent])
     } catch (err) {
         throw err
-    } finally {
-        if (conn) await conn.release();
     }
 }
 

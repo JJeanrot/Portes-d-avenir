@@ -4,7 +4,7 @@ const service = require('../services/evenements.service');
 
 // GET /api/event
 function getEvenements(req,res,next) {
-    service.listEvent()
+    service.getEvenements()
         .then((evenements) => res.json(evenements))
         .catch(next)
 }
