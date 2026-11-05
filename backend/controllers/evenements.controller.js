@@ -24,7 +24,10 @@ function delEvent(req, res, next) {
     const { id } = req.params;
 
     service.delEvent(id)
-        .then((result) => res.json({ message: "Événement supprimé", result }))
+        .then((result) => res.json({
+            message: "Événement supprimé",
+            affectedRows: Number(result.affectedRows)
+        }))
         .catch(next);
 }
 

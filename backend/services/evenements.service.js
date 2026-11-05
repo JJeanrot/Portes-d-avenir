@@ -13,14 +13,9 @@ async function getEvenements(){
     }
 }
 
-function delEvent(req, res, next) {
-    const { id } = req.params;
-    service.delEvent(id)
-        .then((result) => res.json({
-            message: "Événement supprimé",
-            affectedRows: Number(result.affectedRows)
-        }))
-        .catch(next);
+async function delEvent(idEvent) {
+    const query = "DELETE FROM evenement WHERE id_evenement = ?";
+    return await pool.query(query, [idEvent]);
 }
 
 async function createEvent(eventData) {
