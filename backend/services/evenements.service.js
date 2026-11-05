@@ -13,20 +13,26 @@ async function getEvenements(){
     }
 }
 
-async function delEvent(idEvent){
-    let conn
-    try{
-        const query = "delete from evenement WHERE id_evenement = ?";
-        return await conn.query(query, [idEvent])
-    } catch (err) {
-        throw err
-    }
+function delEvent(req, res, next) {
+    const { id } = req.params;
+    service.delEvent(id)
+        .then((result) => res.json({
+            message: "Événement supprimé",
+            affectedRows: Number(result.affectedRows)
+        }))
+        .catch(next);
 }
 
 async function createEvent(eventData) {
-    const { nom, image, date_event, departement_id } = eventData;
+    const nom = eventData.nom || eventData.nom_evenement;
+    const image = eventData.image;
+    const departement_id = eventData.departement_id || eventData.id_departement;
+    const formattedDate = eventData.date_event
+        ? new Date(eventData.date_event).toISOString().slice(0, 19).replace('T', ' ')
+        : null;
     const query = "INSERT INTO evenement (nom, image, date_event, departement_id) VALUES (?, ?, ?, ?)";
-    return await pool.query(query, [nom, image, date_event, departement_id]);
+    return await pool.query(query, [nom, image, formattedDate, departement_id]);
+
 }
 
 async function createDepartement(deptData) {

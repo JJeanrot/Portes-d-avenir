@@ -11,7 +11,12 @@ function getEvenements(req,res,next) {
 
 function createEvent(req, res, next) {
     service.createEvent(req.body)
-        .then((result) => res.status(201).json(result))
+        .then((result) => {
+            res.status(201).json({
+                message: "Événement créé",
+                id_evenement: Number(result.insertId)
+            });
+        })
         .catch(next);
 }
 
@@ -25,7 +30,12 @@ function delEvent(req, res, next) {
 
 function createDepartement(req, res, next) {
     service.createDepartement(req.body)
-        .then((result) => res.status(201).json(result))
+        .then((result) => {
+            res.status(201).json({
+                message: "Département créé",
+                id_departement: Number(result.insertId)
+            });
+        })
         .catch(next);
 }
 
