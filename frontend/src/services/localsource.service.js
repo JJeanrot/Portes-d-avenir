@@ -11,6 +11,6 @@ function getEvenements() {
 
 
 
-export {
+export default {
     getAllDepartements
 }
