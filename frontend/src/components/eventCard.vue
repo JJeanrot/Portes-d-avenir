@@ -44,12 +44,23 @@ const imageUrl = computed(() => `/images/${props.evenement.image}`);
 <style scoped>
 .carte {
   width: 300px;
+  max-height: 277px;
   border-radius: 12px;
   overflow: hidden;
   background: #fff;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
+  position: relative;
+  transform-origin: center center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.carte:hover {
+  transform: scale(1.1);
+  z-index: 10;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
 }
 
 .carte-image {
