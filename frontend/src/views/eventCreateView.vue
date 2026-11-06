@@ -37,7 +37,7 @@ const departementId = ref(0);
 function addEvenement() {
     console.log("ddddddddddddddddddddddddddddddddd")
     let e = {
-        "id_evenement": 7,
+        "id_evenement": evenementStore.lowestAvailableEvenementId,
         "nom": nom.value,
         "image": image.value,
         "date_event": date_event.value,

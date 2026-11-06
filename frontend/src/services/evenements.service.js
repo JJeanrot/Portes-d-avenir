@@ -19,9 +19,43 @@ async function getEvenements() {
     return response
 }
 
+async function getLowestAvailableEvenementId() {
+    let response = null;
+    try {
+        response = await getEvenementsFromLocalSource()
+    }
+    catch(err) {
+        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur'  }
+    }
+    
+    let ids = [];
+    response.data.forEach(evenement => {
+        ids.push(evenement.id_evenement);
+    });
+
+    let lowestId = 1;
+    let available = false;
+    const maxId = Math.max(...ids);
+    while (lowestId < maxId && !available) {
+        if (!ids.includes(lowestId)) {
+            available = true;
+        }
+        else {
+            lowestId++;
+        }
+    }
+
+    if (!available) {
+        lowestId++;
+    }        
+
+    return {error: 0, data: lowestId};
+
+    
+}
+
 async function addEvenement(evenement) {
     let response = null;
-    console.log("sus");
     try {
         response = await addEvenementFromLocalSource(evenement);
     }
@@ -31,4 +65,4 @@ async function addEvenement(evenement) {
     return response
 }
 
-export default { getEvenements, addEvenement }
+export default { getEvenements, getLowestAvailableEvenementId, addEvenement }
