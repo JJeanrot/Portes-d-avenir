@@ -4,9 +4,8 @@ paths:
       tags:
         - Événements
       summary: Liste des événements
-      description: Récupère la liste des événements actifs avec leur département associé.
+      description: Récupère la liste des événements avec leur département associé.
       responses:
-        # controllers/evenements.controller.js:8 (res.json(evenements))
         '200':
           description: Liste des événements récupérée avec succès.
           content:
@@ -20,7 +19,7 @@ paths:
       tags:
         - Événements
       summary: Créer un événement
-      description: Enregistre un nouvel événement dans la base de données.
+      description: Enregistre un nouvel événement dans la base de données. Par défaut, l'événement n'est pas validé (valide = false).
       requestBody:
         required: true
         content:
@@ -28,7 +27,6 @@ paths:
             schema:
               $ref: './openapi.yaml#/components/schemas/CreateEventInput'
       responses:
-        # controllers/evenements.controller.js:15 (res.status(201).json(...))
         '201':
           description: Événement créé avec succès.
           content:
@@ -45,7 +43,6 @@ paths:
       parameters:
         - $ref: './openapi.yaml#/components/parameters/EventId'
       responses:
-        # controllers/evenements.controller.js:27 (res.json(...))
         '200':
           description: Événement supprimé avec succès.
           content:
@@ -60,7 +57,6 @@ paths:
       summary: Liste des départements
       description: Récupère la liste de tous les départements.
       responses:
-        # controllers/evenements.controller.js:36 (res.json(departements))
         '200':
           description: Liste des départements récupérée avec succès.
           content:
@@ -82,7 +78,6 @@ paths:
             schema:
               $ref: './openapi.yaml#/components/schemas/CreateDepartementInput'
       responses:
-        # controllers/evenements.controller.js:43 (res.status(201).json(...))
         '201':
           description: Département créé avec succès.
           content:
@@ -99,11 +94,9 @@ paths:
       parameters:
         - $ref: './openapi.yaml#/components/parameters/DepartementId'
       responses:
-        # controllers/evenements.controller.js:55 (res.json(...))
         '200':
           description: Département supprimé avec succès.
           content:
             application/json:
               schema:
                 $ref: './openapi.yaml#/components/schemas/DepartementSupprime'
-

@@ -1,16 +1,12 @@
 openapi: 3.0.3
 info:
-  title: API Portes d'avenir
-  description: Documentation de l'API REST de Portes d'avenir.
-  version: 1.0.0
-
-servers:
-  - url: http://localhost:3000/api
-    description: Serveur de développement
+  title: API Événements IUT
+  version: 2.0.0
+  description: API de gestion des événements, départements, salles et matériel.
 
 tags:
   - name: Événements
-    description: Gestion des événements de portes ouvertes et départements
+    description: Gestion des événements et des départements
 
 paths:
   /event:
@@ -23,167 +19,295 @@ paths:
     $ref: './evenements.yaml#/paths/~1event~1departement~1{id}'
 
 components:
-
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      description: Jeton Bearer d'authentification
-
-  schemas:
-    Erreur:
-      type: object
-      required:
-        - erreur
-      properties:
-        erreur:
-          type: object
-          required:
-            - code
-            - message
-          properties:
-            code:
-              type: string
-              example: REQUETE_INVALIDE
-            message:
-              type: string
-              example: Description détaillée de l'erreur
-
-    Evenement:
-      type: object
-      properties:
-        id_evenement:
-          type: integer
-          example: 1
-        nom_evenement:
-          type: string
-          example: Journée Portes Ouvertes Informatique
-        image:
-          type: string
-          nullable: true
-          example: jpo_informatique.jpg
-        date_event:
-          type: string
-          format: date-time
-          nullable: true
-          example: "2026-12-05T09:00:00.000Z"
-        nom_departement:
-          type: string
-          example: Informatique
-
-    EvenementCree:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Événement créé
-        id_evenement:
-          type: integer
-          example: 42
-
-    EvenementSupprime:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Événement supprimé
-        affectedRows:
-          type: integer
-          example: 1
-
-    Departement:
-      type: object
-      properties:
-        id_departement:
-          type: integer
-          example: 1
-        nom:
-          type: string
-          example: Informatique
-        address:
-          type: string
-          example: 4 place Tharradin Montbéliard
-
-    DepartementCree:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Département créé
-        id_departement:
-          type: integer
-          example: 2
-
-    DepartementSupprime:
-      type: object
-      properties:
-        message:
-          type: string
-          example: Département supprimé
-        affectedRows:
-          type: integer
-          example: 1
-
-    CreateEventInput:
-      type: object
-      properties:
-        nom:
-          type: string
-          example: Nuit de l'Info
-        nom_evenement:
-          type: string
-          example: Nuit de l'Info
-        image:
-          type: string
-          example: nuit_info.png
-        date_event:
-          type: string
-          format: date-time
-          example: "2026-12-03T18:00:00.000Z"
-        departement_id:
-          type: integer
-          example: 2
-        id_departement:
-          type: integer
-          example: 2
-
-    CreateDepartementInput:
-      type: object
-      required:
-        - nom
-        - address
-      properties:
-        nom:
-          type: string
-          example: Informatique
-        address:
-          type: string
-          example: 4 place Tharradin Montbéliard
-
   parameters:
     EventId:
       name: id
       in: path
       required: true
-      description: Identifiant unique de l'événement
+      description: Identifiant de l'événement (id_evenement).
       schema:
         type: integer
+        minimum: 1
         example: 1
 
     DepartementId:
       name: id
       in: path
       required: true
-      description: Identifiant unique du département
+      description: Identifiant du département (id_departement).
       schema:
         type: integer
+        minimum: 1
         example: 1
 
+  schemas:
+    # ---------- Départements ----------
+    Departement:
+      type: object
+      properties:
+        id_departement:
+          type: integer
+          example: 1
+        nom_departement:
+          type: string
+          maxLength: 255
+          example: Informatique
+        addresse_departement:
+          type: string
+          maxLength: 255
+          example: 19 Avenue du Maréchal Juin, 90000 Belfort
+      required:
+        - id_departement
+        - nom_departement
+        - addresse_departement
 
-  responses:
-    ErreurGenerique:
-      description: Erreur HTTP standardisée
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/Erreur'
+    CreateDepartementInput:
+      type: object
+      properties:
+        nom_departement:
+          type: string
+          maxLength: 255
+          example: Informatique
+        addresse_departement:
+          type: string
+          maxLength: 255
+          example: 19 Avenue du Maréchal Juin, 90000 Belfort
+      required:
+        - nom_departement
+        - addresse_departement
+
+    DepartementCree:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Département créé avec succès.
+        id_departement:
+          type: integer
+          example: 4
+      required:
+        - message
+        - id_departement
+
+    DepartementSupprime:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Département supprimé avec succès.
+      required:
+        - message
+
+    # ---------- Événements ----------
+    Evenement:
+      type: object
+      properties:
+        id_evenement:
+          type: integer
+          example: 1
+        nom_evenements:
+          type: string
+          maxLength: 255
+          example: Journée Portes Ouvertes Informatique
+        image_evenements:
+          type: string
+          nullable: true
+          maxLength: 255
+          example: jpo_informatique.jpg
+        date_evenements:
+          type: string
+          format: date-time
+          example: '2026-12-05T09:00:00.000Z'
+        departement_id:
+          type: integer
+          example: 1
+        valide:
+          type: boolean
+          description: Indique si l'événement a été validé.
+          example: true
+        nom_departement:
+          type: string
+          description: Nom du département associé (jointure).
+          example: Informatique
+        addresse_departement:
+          type: string
+          description: Adresse du département associé (jointure).
+          example: 19 Avenue du Maréchal Juin, 90000 Belfort
+      required:
+        - id_evenement
+        - nom_evenements
+        - date_evenements
+        - departement_id
+        - valide
+
+    CreateEventInput:
+      type: object
+      properties:
+        nom_evenements:
+          type: string
+          maxLength: 255
+          example: Journée Portes Ouvertes Informatique
+        image_evenements:
+          type: string
+          nullable: true
+          maxLength: 255
+          example: jpo_informatique.jpg
+        date_evenements:
+          type: string
+          format: date-time
+          example: '2026-12-05T09:00:00'
+        departement_id:
+          type: integer
+          example: 1
+        valide:
+          type: boolean
+          default: false
+          example: false
+      required:
+        - nom_evenements
+        - date_evenements
+        - departement_id
+
+    EvenementCree:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Événement créé avec succès.
+        id_evenement:
+          type: integer
+          example: 7
+      required:
+        - message
+        - id_evenement
+
+    EvenementSupprime:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Événement supprimé avec succès.
+      required:
+        - message
+
+    # ---------- Autres tables (prêtes pour de futures routes) ----------
+    Salle:
+      type: object
+      properties:
+        id_salle:
+          type: integer
+          example: 1
+        departement_id:
+          type: integer
+          example: 1
+        nom_sallle:
+          type: string
+          maxLength: 255
+          example: Amphi A
+      required:
+        - id_salle
+        - departement_id
+        - nom_sallle
+
+    CategorieMateriel:
+      type: object
+      properties:
+        id_categorie_materiel:
+          type: integer
+          example: 1
+        nom_categorie_materiel:
+          type: string
+          maxLength: 255
+          example: Mobilier
+      required:
+        - id_categorie_materiel
+        - nom_categorie_materiel
+
+    Materiel:
+      type: object
+      properties:
+        id_materiel:
+          type: integer
+          example: 1
+        categorie_materiel_id:
+          type: integer
+          example: 2
+        nom_materiel:
+          type: string
+          maxLength: 255
+          example: Ordinateur portable
+        quantite:
+          type: integer
+          example: 20
+        departement_id:
+          type: integer
+          example: 1
+      required:
+        - id_materiel
+        - categorie_materiel_id
+        - nom_materiel
+        - quantite
+        - departement_id
+
+    ReservationSalle:
+      type: object
+      properties:
+        salle_id:
+          type: integer
+          example: 1
+        evenement_id:
+          type: integer
+          example: 1
+      required:
+        - salle_id
+        - evenement_id
+
+    ReservationMateriel:
+      type: object
+      properties:
+        evenement_id:
+          type: integer
+          example: 1
+        materiel_id:
+          type: integer
+          example: 1
+        quantite:
+          type: integer
+          example: 10
+      required:
+        - evenement_id
+        - materiel_id
+        - quantite
+
+    Role:
+      type: object
+      properties:
+        id_role:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          nullable: true
+          maxLength: 255
+          example: admin
+      required:
+        - id_role
+
+    User:
+      type: object
+      description: Le mot de passe (password_user) ne doit jamais être renvoyé par l'API.
+      properties:
+        id_user:
+          type: integer
+          example: 1
+        nom_user:
+          type: string
+          maxLength: 255
+          example: jdupont
+        role_id:
+          type: integer
+          example: 1
+      required:
+        - id_user
+        - nom_user
+        - role_id

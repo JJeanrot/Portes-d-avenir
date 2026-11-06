@@ -22,7 +22,7 @@ chargerDocumentation()
         console.error('Erreur lors du chargement de la documentation OpenAPI:', err);
     });
 
-app.use('/api/event', routesEvenements);
+app.use('/event', routesEvenements);
 
 
 
