@@ -1,26 +1,9 @@
 
 const express = require('express');
 const cors = require('cors');
-const swaggerJsdoc = require('swagger-jsdoc');
 const swaggerUI = require('swagger-ui-express');
 const routesEvenements = require('./routes/evenements.routes');
-
-const swaggerOptions = swaggerJsdoc({
-    definition: {
-        openapi: '3.0.0',
-        info: {
-            title: 'API test',
-            version: '1.0.0',
-        },
-        servers: [
-            {
-                url: 'http://localhost:3000',
-            },
-        ],
-    },
-    apis: ['./routes/*.js', './server.js'],
-});
-
+const chargerDocumentation = require('./docs/charger-docs');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -30,12 +13,17 @@ app.use(express.urlencoded({ extended: true }));
 BigInt.prototype.toJSON = function() { return Number(this); };
 app.use(cors({ origin: 'http://localhost:5173' }));
 
-app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerOptions));
+// Initialisation asynchrone de la documentation Swagger à partir des fichiers YAML
+chargerDocumentation()
+    .then((openapiDoc) => {
+        app.use('/docs', swaggerUI.serve, swaggerUI.setup(openapiDoc));
+    })
+    .catch((err) => {
+        console.error('Erreur lors du chargement de la documentation OpenAPI:', err);
+    });
 
+app.use('/api/event', routesEvenements);
 
-app.use(cors({ origin: 'http://localhost:5173' }));
-
-app.use('/api/event',routesEvenements)
 
 
 app.listen(PORT, () => {
