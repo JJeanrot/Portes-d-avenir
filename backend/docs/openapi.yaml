@@ -1,0 +1,153 @@
+openapi: 3.0.3
+info:
+  title: API Portes d'avenir
+  description: Documentation de l'API REST de Portes d'avenir.
+  version: 1.0.0
+
+servers:
+  - url: http://localhost:3000/api
+    description: Serveur de développement
+
+tags:
+  - name: Événements
+    description: Gestion des événements de portes ouvertes et départements
+
+paths:
+  /event:
+    $ref: './evenements.yaml#/paths/~1event'
+  /event/{id}:
+    $ref: './evenements.yaml#/paths/~1event~1{id}'
+  /event/departement:
+    $ref: './evenements.yaml#/paths/~1event~1departement'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Jeton Bearer d'authentification
+
+  schemas:
+    Erreur:
+      type: object
+      required:
+        - erreur
+      properties:
+        erreur:
+          type: object
+          required:
+            - code
+            - message
+          properties:
+            code:
+              type: string
+              example: REQUETE_INVALIDE
+            message:
+              type: string
+              example: Description détaillée de l'erreur
+
+    Evenement:
+      type: object
+      properties:
+        id_evenement:
+          type: integer
+          example: 1
+        nom_evenement:
+          type: string
+          example: Journée Portes Ouvertes Informatique
+        image:
+          type: string
+          nullable: true
+          example: jpo_informatique.jpg
+        date_event:
+          type: string
+          format: date-time
+          nullable: true
+          example: "2026-12-05T09:00:00.000Z"
+        nom_departement:
+          type: string
+          example: Informatique
+
+    EvenementCree:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Événement créé
+        id_evenement:
+          type: integer
+          example: 42
+
+    EvenementSupprime:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Événement supprimé
+        affectedRows:
+          type: integer
+          example: 1
+
+    DepartementCree:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Département créé
+        id_departement:
+          type: integer
+          example: 2
+
+    CreateEventInput:
+      type: object
+      properties:
+        nom:
+          type: string
+          example: Nuit de l'Info
+        nom_evenement:
+          type: string
+          example: Nuit de l'Info
+        image:
+          type: string
+          example: nuit_info.png
+        date_event:
+          type: string
+          format: date-time
+          example: "2026-12-03T18:00:00.000Z"
+        departement_id:
+          type: integer
+          example: 2
+        id_departement:
+          type: integer
+          example: 2
+
+    CreateDepartementInput:
+      type: object
+      required:
+        - nom
+        - address
+      properties:
+        nom:
+          type: string
+          example: Informatique
+        address:
+          type: string
+          example: 4 place Tharradin Montbéliard
+
+  parameters:
+    EventId:
+      name: id
+      in: path
+      required: true
+      description: Identifiant unique de l'événement
+      schema:
+        type: integer
+        example: 1
+
+  responses:
+    ErreurGenerique:
+      description: Erreur HTTP standardisée
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Erreur'

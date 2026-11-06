@@ -1,0 +1,75 @@
+paths:
+  /event:
+    get:
+      tags:
+        - Événements
+      summary: Liste des événements
+      description: Récupère la liste des événements actifs avec leur département associé.
+      responses:
+        # controllers/evenements.controller.js:8 (res.json(evenements))
+        '200':
+          description: Liste des événements récupérée avec succès.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './openapi.yaml#/components/schemas/Evenement'
+
+    post:
+      tags:
+        - Événements
+      summary: Créer un événement
+      description: Enregistre un nouvel événement dans la base de données.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './openapi.yaml#/components/schemas/CreateEventInput'
+      responses:
+        # controllers/evenements.controller.js:15 (res.status(201).json(...))
+        '201':
+          description: Événement créé avec succès.
+          content:
+            application/json:
+              schema:
+                $ref: './openapi.yaml#/components/schemas/EvenementCree'
+
+  /event/{id}:
+    delete:
+      tags:
+        - Événements
+      summary: Supprimer un événement
+      description: Supprime un événement par son identifiant unique.
+      parameters:
+        - $ref: './openapi.yaml#/components/parameters/EventId'
+      responses:
+        # controllers/evenements.controller.js:27 (res.json(...))
+        '200':
+          description: Événement supprimé avec succès.
+          content:
+            application/json:
+              schema:
+                $ref: './openapi.yaml#/components/schemas/EvenementSupprime'
+
+  /event/departement:
+    post:
+      tags:
+        - Événements
+      summary: Créer un département
+      description: Enregistre un nouveau département.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './openapi.yaml#/components/schemas/CreateDepartementInput'
+      responses:
+        # controllers/evenements.controller.js:37 (res.status(201).json(...))
+        '201':
+          description: Département créé avec succès.
+          content:
+            application/json:
+              schema:
+                $ref: './openapi.yaml#/components/schemas/DepartementCree'
