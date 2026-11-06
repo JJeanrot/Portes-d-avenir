@@ -16,6 +16,7 @@ const evenementsStore = useEvenementsStore();
 onMounted(() => {
     departementStore.getDepartements();
     evenementsStore.getEvenements();
+    evenementsStore.getLowestAvailableEvenementId();
 })
 
 </script>
