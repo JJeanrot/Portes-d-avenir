@@ -17,5 +17,12 @@ export const useEvenementsStore = defineStore("evenement", () => {
         }
     }
 
-    return { evenements, getEvenements }
+    async function addEvenement(evenement) {
+        let response = await EvenementsService.addEvenement(evenement);
+        if (response.error !== 0) {
+            console.log(response.data);
+        }
+    }
+
+    return { evenements, getEvenements, addEvenement }
 });
