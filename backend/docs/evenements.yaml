@@ -54,6 +54,22 @@ paths:
                 $ref: './openapi.yaml#/components/schemas/EvenementSupprime'
 
   /event/departement:
+    get:
+      tags:
+        - Événements
+      summary: Liste des départements
+      description: Récupère la liste de tous les départements.
+      responses:
+        # controllers/evenements.controller.js:36 (res.json(departements))
+        '200':
+          description: Liste des départements récupérée avec succès.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './openapi.yaml#/components/schemas/Departement'
+
     post:
       tags:
         - Événements
@@ -66,10 +82,28 @@ paths:
             schema:
               $ref: './openapi.yaml#/components/schemas/CreateDepartementInput'
       responses:
-        # controllers/evenements.controller.js:37 (res.status(201).json(...))
+        # controllers/evenements.controller.js:43 (res.status(201).json(...))
         '201':
           description: Département créé avec succès.
           content:
             application/json:
               schema:
                 $ref: './openapi.yaml#/components/schemas/DepartementCree'
+
+  /event/departement/{id}:
+    delete:
+      tags:
+        - Événements
+      summary: Supprimer un département
+      description: Supprime un département par son identifiant unique.
+      parameters:
+        - $ref: './openapi.yaml#/components/parameters/DepartementId'
+      responses:
+        # controllers/evenements.controller.js:55 (res.json(...))
+        '200':
+          description: Département supprimé avec succès.
+          content:
+            application/json:
+              schema:
+                $ref: './openapi.yaml#/components/schemas/DepartementSupprime'
+

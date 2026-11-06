@@ -31,6 +31,12 @@ function delEvent(req, res, next) {
         .catch(next);
 }
 
+function getDepartements(req, res, next) {
+    service.getDepartements()
+        .then((departements) => res.json(departements))
+        .catch(next);
+}
+
 function createDepartement(req, res, next) {
     service.createDepartement(req.body)
         .then((result) => {
@@ -42,4 +48,16 @@ function createDepartement(req, res, next) {
         .catch(next);
 }
 
-module.exports = {getEvenements, createEvent, delEvent, createDepartement};
+function delDepartement(req, res, next) {
+    const { id } = req.params;
+
+    service.delDepartement(id)
+        .then((result) => res.json({
+            message: "Département supprimé",
+            affectedRows: Number(result.affectedRows)
+        }))
+        .catch(next);
+}
+
+module.exports = {getEvenements, createEvent, delEvent, getDepartements, createDepartement, delDepartement};
+

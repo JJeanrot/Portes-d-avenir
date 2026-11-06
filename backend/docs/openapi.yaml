@@ -19,8 +19,11 @@ paths:
     $ref: './evenements.yaml#/paths/~1event~1{id}'
   /event/departement:
     $ref: './evenements.yaml#/paths/~1event~1departement'
+  /event/departement/{id}:
+    $ref: './evenements.yaml#/paths/~1event~1departement~1{id}'
 
 components:
+
   securitySchemes:
     bearerAuth:
       type: http
@@ -88,6 +91,19 @@ components:
           type: integer
           example: 1
 
+    Departement:
+      type: object
+      properties:
+        id_departement:
+          type: integer
+          example: 1
+        nom:
+          type: string
+          example: Informatique
+        address:
+          type: string
+          example: 4 place Tharradin Montbéliard
+
     DepartementCree:
       type: object
       properties:
@@ -97,6 +113,16 @@ components:
         id_departement:
           type: integer
           example: 2
+
+    DepartementSupprime:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Département supprimé
+        affectedRows:
+          type: integer
+          example: 1
 
     CreateEventInput:
       type: object
@@ -143,6 +169,16 @@ components:
       schema:
         type: integer
         example: 1
+
+    DepartementId:
+      name: id
+      in: path
+      required: true
+      description: Identifiant unique du département
+      schema:
+        type: integer
+        example: 1
+
 
   responses:
     ErreurGenerique:

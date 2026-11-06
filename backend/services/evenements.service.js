@@ -38,6 +38,15 @@ async function createEvent(eventData) {
 
 }
 
+async function getDepartements() {
+    try {
+        const query = "SELECT id_departement, nom, address FROM departement";
+        return await pool.query(query);
+    } catch (err) {
+        throw err;
+    }
+}
+
 async function createDepartement(deptData) {
     try {
         const {nom, address} = deptData;
@@ -48,4 +57,13 @@ async function createDepartement(deptData) {
     }
 }
 
-module.exports = { getEvenements, delEvent, createEvent, createDepartement };
+async function delDepartement(idDept) {
+    try {
+        const query = "DELETE FROM departement WHERE id_departement = ?";
+        return await pool.query(query, [idDept]);
+    } catch (err) {
+        throw err;
+    }
+}
+
+module.exports = { getEvenements, delEvent, createEvent, getDepartements, createDepartement, delDepartement };
