@@ -4,10 +4,9 @@
 
 <script setup>
 
-import {computed, ref} from "vue";
+import {computed} from "vue";
 import eventCard from "@/components/eventCard.vue";
-import {useEvenementsStore} from "@/stores/evenements.js";
-const evenementsStore = useEvenementsStore();
+
 
 const props = defineProps({
   evenement: {
@@ -31,9 +30,7 @@ const imageUrl = computed(() => `/images/${props.evenement.image}`);
 
 
 
-function deleteEvenement() {
-  evenementsStore.deleteEvenement(props.evenement)
-}
+
 </script>
 
 <template>
@@ -47,7 +44,8 @@ function deleteEvenement() {
       <h3 class="nom">{{ evenement.nom }}</h3>
       <p class="date">{{ dateFormatee }}</p>
     </div>
-    <button @click="deleteEvenement()">SUPPRIMER</button>
+
+    <router-link :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }"><button>SUPPRIMER</button></router-link>
   </article>
 </template>
 

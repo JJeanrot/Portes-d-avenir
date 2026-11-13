@@ -10,6 +10,12 @@ const routes = [
         path: '/event',
         name: 'getevent',
         component: () => import('@/views/eventPage.vue')
+    },
+    {
+        path: '/event/delete/:id',
+        name: 'deleteEvenement',
+        component: () => import('@/views/eventDeletePage.vue'),
+        props: true
     }
 ]
 
