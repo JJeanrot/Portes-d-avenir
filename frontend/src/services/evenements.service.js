@@ -8,6 +8,10 @@ async function addEvenementFromLocalSource(evenement) {
     return LocalSource.addEvenement(evenement);
 }
 
+async function deleteEvenementFromLocalSource(evenement) {
+    return LocalSource.deleteEvenement(evenement);
+}
+
 async function getEvenements() {
     let response = null;
     try {
@@ -65,4 +69,14 @@ async function addEvenement(evenement) {
     return response
 }
 
-export default { getEvenements, getLowestAvailableEvenementId, addEvenement }
+async function deleteEvenement(evenement) {
+    let response = null;
+    try{
+        response = await deleteEvenementFromLocalSource(evenement);
+    }catch(err) {
+        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur'  }
+    }
+    return response
+}
+
+export default { getEvenements, getLowestAvailableEvenementId, addEvenement, deleteEvenement }

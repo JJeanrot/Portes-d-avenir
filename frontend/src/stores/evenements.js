@@ -34,5 +34,12 @@ export const useEvenementsStore = defineStore("evenement", () => {
         }
     }
 
-    return { evenements, lowestAvailableEvenementId, getEvenements, getLowestAvailableEvenementId, addEvenement }
+    async function deleteEvenement(evenement) {
+        let response = await EvenementsService.deleteEvenement(evenement);
+        if (response.error !== 0) {
+            console.log(response.data);
+        }
+    }
+
+    return { evenements, lowestAvailableEvenementId, getEvenements, getLowestAvailableEvenementId, addEvenement, deleteEvenement };
 });

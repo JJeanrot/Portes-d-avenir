@@ -14,7 +14,14 @@ function addEvenement(evenement) {
     return {error: 0, data: evenement}
 }
 
+function deleteEvenement(evenement) {
+    let index = evenements.indexOf(evenement);
+    console.log(evenements);
+    evenements.splice(index, 1);
+    console.log(evenements);
+    return {error: 0, data: evenement}
+}
 
 export default {
-    getAllDepartements, getEvenements, addEvenement
+    getAllDepartements, getEvenements, addEvenement, deleteEvenement
 }
