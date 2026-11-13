@@ -2,13 +2,19 @@
 import { computed } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
 import { useEvenementsStore } from '@/stores/evenements.js';
+import { useDepartementStore } from '@/stores/departement.js';
 
 const route = useRoute();
 const router = useRouter();
 const evenementsStore = useEvenementsStore();
+const departementsStore = useDepartementStore();
 
 const evenement = computed(() =>
     evenementsStore.evenements.find(e => e.id_evenement === Number(route.params.id))
+);
+
+const departement = computed(() =>
+    departementsStore.departements.find(d => d.id_departement === Number(evenement.value.departement_id))
 );
 
 async function confirmerSuppression() {
@@ -20,7 +26,7 @@ async function confirmerSuppression() {
 <template>
   <div v-if="evenement">
     <h2>Supprimer l'événement</h2>
-    <p>Voulez-vous supprimer <strong>{{ evenement.nom_evenement }}</strong> du <em>{{ evenement.nom_departement }}</em> ?</p>
+    <p>Voulez-vous supprimer <strong>{{ evenement.nom }}</strong> du <em>{{ departement.nom }}</em> ?</p>
     <div class="actions">
       <button class="btn-confirmer" @click="confirmerSuppression">Confirmer la suppression</button>
       <router-link :to="{ name: 'getevent' }"><button class="btn-annuler">Annuler</button></router-link>

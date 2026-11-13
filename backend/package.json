@@ -24,5 +24,8 @@
     "mariadb": "^3.5.4",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
+  },
+  "allowScripts": {
+    "@scarf/scarf@1.4.0": true
   }
 }
