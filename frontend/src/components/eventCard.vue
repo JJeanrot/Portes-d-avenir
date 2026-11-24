@@ -7,6 +7,7 @@
 import {computed} from "vue";
 import eventCard from "@/components/eventCard.vue";
 
+import {useSettingsStore} from "@/stores/settings.js";
 
 const props = defineProps({
   evenement: {
@@ -14,6 +15,8 @@ const props = defineProps({
     required: true
   }
 });
+
+const settings = useSettingsStore();
 
 const dateFormatee = computed(() => {
   const date = new Date(props.evenement.date_event.replace(" ", "T"));
@@ -45,7 +48,7 @@ const imageUrl = computed(() => `/images/${props.evenement.image}`);
       <p class="date">{{ dateFormatee }}</p>
     </div>
 
-    <router-link :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }"><button>SUPPRIMER</button></router-link>
+    <router-link v-if="settings.selectedRole == 'Mega_organisateur'" :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }"><button>SUPPRIMER</button></router-link>
   </article>
 </template>
 
