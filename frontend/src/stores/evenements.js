@@ -6,6 +6,7 @@ import EvenementsService from "@/services/evenements.service"
 export const useEvenementsStore = defineStore("evenement", () => {
 
     const evenements = ref([]);
+    const evenementsNonValides = ref([]);
     const lowestAvailableEvenementId = ref(0);
 
     async function getEvenements() {
@@ -14,6 +15,28 @@ export const useEvenementsStore = defineStore("evenement", () => {
             evenements.value = response.data;
         }
         else {
+            console.log(response.data);
+        }
+    }
+
+    async function getEvenementsNonValides() {
+        let response = await EvenementsService.getEvenementsNonValides();
+        if (response.error === 0) {
+            evenementsNonValides.value = response.data;
+        }
+        else {
+            console.log(response.data);
+        }
+    }
+
+    async function validerEvenement(evenement) {
+        const id = evenement.id_evenement || evenement;
+        let response = await EvenementsService.validerEvenement(id);
+        if (response.error === 0) {
+            // Mettre à jour localement les listes
+            await getEvenements();
+            await getEvenementsNonValides();
+        } else {
             console.log(response.data);
         }
     }
@@ -31,6 +54,9 @@ export const useEvenementsStore = defineStore("evenement", () => {
         let response = await EvenementsService.addEvenement(evenement);
         if (response.error !== 0) {
             console.log(response.data);
+        } else {
+            await getEvenements();
+            await getEvenementsNonValides();
         }
     }
 
@@ -38,8 +64,21 @@ export const useEvenementsStore = defineStore("evenement", () => {
         let response = await EvenementsService.deleteEvenement(evenement);
         if (response.error !== 0) {
             console.log(response.data);
+        } else {
+            await getEvenements();
+            await getEvenementsNonValides();
         }
     }
 
-    return { evenements, lowestAvailableEvenementId, getEvenements, getLowestAvailableEvenementId, addEvenement, deleteEvenement };
+    return { 
+        evenements, 
+        evenementsNonValides, 
+        lowestAvailableEvenementId, 
+        getEvenements, 
+        getEvenementsNonValides, 
+        validerEvenement, 
+        getLowestAvailableEvenementId, 
+        addEvenement, 
+        deleteEvenement 
+    };
 });

@@ -14,5 +14,6 @@ create table evenement(
     image varchar(255),
     date_event DATETIME,
     departement_id int,
+    valide boolean default false,
     foreign key evenement(departement_id) references departement(id_departement)
 );

@@ -22,14 +22,16 @@ let evenements = [
         "nom": "Journée Portes Ouvertes Informatique",
         "image": "jpo_informatique.jpg",
         "date_event": "2026-12-05 09:00:00",
-        "departement_id": 1
+        "departement_id": 1,
+        "valide": true
     },
     {
         "id_evenement": 2,
         "nom": "Portes Ouvertes Informatique - Session lycéens",
         "image": "jpo_informatique_lyceens.jpg",
         "date_event": "2027-02-06 13:30:00",
-        "departement_id": 1
+        "departement_id": 1,
+        "valide": false
     },
 
     {
@@ -37,14 +39,16 @@ let evenements = [
         "nom": "Journée Portes Ouvertes Génie Civil",
         "image": "jpo_genie_civil.jpg",
         "date_event": "2026-12-12 09:00:00",
-        "departement_id": 2
+        "departement_id": 2,
+        "valide": true
     },
     {
         "id_evenement": 4,
         "nom": "Portes Ouvertes Génie Civil - Visite des laboratoires",
         "image": "jpo_genie_civil_labos.jpg",
         "date_event": "2027-01-30 14:00:00",
-        "departement_id": 2
+        "departement_id": 2,
+        "valide": false
     },
 
     {
@@ -52,14 +56,16 @@ let evenements = [
         "nom": "Journée Portes Ouvertes Réseaux et Télécoms",
         "image": "jpo_reseaux_telecoms.jpg",
         "date_event": "2026-12-05 10:00:00",
-        "departement_id": 3
+        "departement_id": 3,
+        "valide": true
     },
     {
         "id_evenement": 6,
         "nom": "Portes Ouvertes Réseaux et Télécoms - Découverte des formations",
         "image": "jpo_reseaux_formations.jpg",
         "date_event": "2027-03-06 09:30:00",
-        "departement_id": 3
+        "departement_id": 3,
+        "valide": false
     }
 ];
 

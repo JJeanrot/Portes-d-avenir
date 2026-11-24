@@ -34,6 +34,22 @@ paths:
               schema:
                 $ref: './openapi.yaml#/components/schemas/EvenementCree'
 
+  /event/non-valides:
+    get:
+      tags:
+        - Événements
+      summary: Liste des événements non validés
+      description: Récupère la liste des événements en attente de validation (valide = false).
+      responses:
+        '200':
+          description: Liste des événements non validés récupérée avec succès.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: './openapi.yaml#/components/schemas/Evenement'
+
   /event/{id}:
     delete:
       tags:
@@ -49,6 +65,23 @@ paths:
             application/json:
               schema:
                 $ref: './openapi.yaml#/components/schemas/EvenementSupprime'
+
+  /event/{id}/valider:
+    patch:
+      tags:
+        - Événements
+      summary: Valider un événement
+      description: Valide un événement par son identifiant (passe valide à true).
+      parameters:
+        - $ref: './openapi.yaml#/components/parameters/EventId'
+      responses:
+        '200':
+          description: Événement validé avec succès.
+          content:
+            application/json:
+              schema:
+                $ref: './openapi.yaml#/components/schemas/EvenementValide'
+
 
   /event/departement:
     get:

@@ -59,5 +59,23 @@ function delDepartement(req, res, next) {
         .catch(next);
 }
 
-module.exports = {getEvenements, createEvent, delEvent, getDepartements, createDepartement, delDepartement};
+function getEvenementsNonValides(req, res, next) {
+    service.getEvenementsNonValides()
+        .then((evenements) => res.json(evenements))
+        .catch(next);
+}
+
+function validerEvenement(req, res, next) {
+    const { id } = req.params;
+
+    service.validerEvenement(id)
+        .then((result) => res.json({
+            message: "Événement validé",
+            affectedRows: Number(result.affectedRows)
+        }))
+        .catch(next);
+}
+
+module.exports = {getEvenements, getEvenementsNonValides, validerEvenement, createEvent, delEvent, getDepartements, createDepartement, delDepartement};
+
 

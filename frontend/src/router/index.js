@@ -2,6 +2,10 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     {
+        path: '/',
+        redirect: '/event'
+    },
+    {
         path: '/event/create',
         name: 'eventcreate',
         component: () => import('@/views/eventCreateView.vue')
@@ -10,6 +14,11 @@ const routes = [
         path: '/event',
         name: 'getevent',
         component: () => import('@/views/eventPage.vue')
+    },
+    {
+        path: '/event/validation',
+        name: 'eventValidation',
+        component: () => import('@/views/eventValidationView.vue')
     },
     {
         path: '/event/delete/:id',

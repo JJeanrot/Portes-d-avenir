@@ -5,7 +5,7 @@
 <script setup>
 
 import {computed} from "vue";
-import eventCard from "@/components/eventCard.vue";
+import {useEvenementsStore} from "@/stores/evenements.js";
 
 import {useSettingsStore} from "@/stores/settings.js";
 
@@ -31,9 +31,9 @@ const dateFormatee = computed(() => {
 
 const imageUrl = computed(() => `/images/${props.evenement.image}`);
 
-
-
-
+function valider() {
+  evenementsStore.validerEvenement(props.evenement);
+}
 </script>
 
 <template>
@@ -49,6 +49,9 @@ const imageUrl = computed(() => `/images/${props.evenement.image}`);
     </div>
 
     <router-link v-if="settings.selectedRole == 'Mega_organisateur'" :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }"><button>SUPPRIMER</button></router-link>
+    <div class="carte-actions">
+      <button v-if="!evenement.valide" class="btn-valider" @click="valider()">VALIDER</button>
+    </div>
   </article>
 </template>
 
@@ -111,5 +114,48 @@ const imageUrl = computed(() => `/images/${props.evenement.image}`);
   margin: 0;
   font-size: 0.85rem;
   color: #6b7280;
+}
+
+.carte-actions {
+  display: flex;
+  gap: 8px;
+  padding: 10px 16px;
+  background: #fafafa;
+  border-top: 1px solid #f0f0f0;
+  margin-top: auto;
+}
+
+.btn-valider {
+  flex: 1;
+  background-color: #16a34a;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-valider:hover {
+  background-color: #15803d;
+}
+
+.btn-supprimer {
+  flex: 1;
+  background-color: #dc2626;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-supprimer:hover {
+  background-color: #b91c1c;
 }
 </style>

@@ -11,12 +11,17 @@ tags:
 paths:
   /event:
     $ref: './evenements.yaml#/paths/~1event'
+  /event/non-valides:
+    $ref: './evenements.yaml#/paths/~1event~1non-valides'
   /event/{id}:
     $ref: './evenements.yaml#/paths/~1event~1{id}'
+  /event/{id}/valider:
+    $ref: './evenements.yaml#/paths/~1event~1{id}~1valider'
   /event/departement:
     $ref: './evenements.yaml#/paths/~1event~1departement'
   /event/departement/{id}:
     $ref: './evenements.yaml#/paths/~1event~1departement~1{id}'
+
 
 components:
   parameters:
@@ -189,6 +194,19 @@ components:
           example: Événement supprimé avec succès.
       required:
         - message
+
+    EvenementValide:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Événement validé avec succès.
+        affectedRows:
+          type: integer
+          example: 1
+      required:
+        - message
+
 
     # ---------- Autres tables (prêtes pour de futures routes) ----------
     Salle:

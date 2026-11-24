@@ -69,14 +69,44 @@ async function addEvenement(evenement) {
     return response
 }
 
-async function deleteEvenement(evenement) {
-    let response = null;
-    try{
-        response = await deleteEvenementFromLocalSource(evenement);
-    }catch(err) {
-        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur'  }
-    }
-    return response
+async function getEvenementsNonValidesFromLocalSource() {
+    return LocalSource.getEvenementsNonValides();
 }
 
-export default { getEvenements, getLowestAvailableEvenementId, addEvenement, deleteEvenement }
+async function validerEvenementFromLocalSource(id) {
+    return LocalSource.validerEvenement(id);
+}
+
+async function getEvenementsNonValides() {
+    let response = null;
+    try {
+        response = await getEvenementsNonValidesFromLocalSource();
+    } catch(err) {
+        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur' };
+    }
+    return response;
+}
+
+async function validerEvenement(id) {
+    let response = null;
+    try {
+        response = await validerEvenementFromLocalSource(id);
+    } catch(err) {
+        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur' };
+    }
+    return response;
+}
+
+async function deleteEvenement(evenement) {
+    let response = null;
+    try {
+        response = await deleteEvenementFromLocalSource(evenement);
+    } catch(err) {
+        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur' };
+    }
+    return response;
+}
+
+export default { getEvenements, getEvenementsNonValides, validerEvenement, getLowestAvailableEvenementId, addEvenement, deleteEvenement }
+
+

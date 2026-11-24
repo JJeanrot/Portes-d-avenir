@@ -4,7 +4,9 @@ const controleur = require('../controllers/evenements.controller');
 const router = express.Router();
 
 router.get('/', controleur.getEvenements);
+router.get('/non-valides', controleur.getEvenementsNonValides);
 router.post('/', controleur.createEvent);
+router.patch('/:id/valider', controleur.validerEvenement);
 router.delete('/:id', controleur.delEvent);
 router.get('/departement', controleur.getDepartements);
 router.post('/departement', controleur.createDepartement);
