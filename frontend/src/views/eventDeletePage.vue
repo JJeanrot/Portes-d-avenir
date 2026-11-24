@@ -9,9 +9,11 @@ const router = useRouter();
 const evenementsStore = useEvenementsStore();
 const departementsStore = useDepartementStore();
 
-const evenement = computed(() =>
-    evenementsStore.evenements.find(e => e.id_evenement === Number(route.params.id))
-);
+const evenement = computed(() => {
+    const id = Number(route.params.id);
+    return evenementsStore.evenements.find(e => e.id_evenement === id)
+        || evenementsStore.evenementsNonValides.find(e => e.id_evenement === id);
+});
 
 const departement = computed(() =>
     departementsStore.departements.find(d => d.id_departement === Number(evenement.value.departement_id))

@@ -21,6 +21,12 @@ const routes = [
         component: () => import('@/views/eventValidationView.vue')
     },
     {
+        path: '/event/valider/:id',
+        name: 'validerEvenement',
+        component: () => import('@/views/eventValidatePage.vue'),
+        props: true
+    },
+    {
         path: '/event/delete/:id',
         name: 'deleteEvenement',
         component: () => import('@/views/eventDeletePage.vue'),

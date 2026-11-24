@@ -48,9 +48,13 @@ function valider() {
       <p class="date">{{ dateFormatee }}</p>
     </div>
 
-    <router-link v-if="settings.selectedRole == 'Mega_organisateur'" :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }"><button>SUPPRIMER</button></router-link>
-    <div class="carte-actions">
-      <button v-if="!evenement.valide" class="btn-valider" @click="valider()">VALIDER</button>
+    <div v-if="settings.selectedRole == 'Mega_organisateur'" class="carte-actions">
+      <router-link v-if="!evenement.valide" :to="{ name: 'validerEvenement', params: { id: evenement.id_evenement } }">
+        <button class="btn-valider">VALIDER</button>
+      </router-link>
+      <router-link :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }">
+        <button class="btn-supprimer">SUPPRIMER</button>
+      </router-link>
     </div>
   </article>
 </template>
