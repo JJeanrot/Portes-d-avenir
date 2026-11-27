@@ -69,6 +69,22 @@ let evenements = [
     }
 ];
 
+// A étoffer (aussi dans le back)
+let benevoles = [
+    {
+        "id_benevole": 1,
+        "departement_id": 1
+    },
+    {
+        "id_benevole": 2,
+        "departement_id": 1
+    },
+    {
+        "id_benevole": 3,
+        "departement_id": 2
+    }
+];
+
 export {
     departements,
     evenements
