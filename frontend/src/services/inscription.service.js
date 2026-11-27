@@ -30,3 +30,8 @@ async function getBenevoleInscriptions(benevole_id) {
     return response;
 }
 
+export default {
+    getInscriptions,
+    getBenevoleInscriptions,
+}
+
