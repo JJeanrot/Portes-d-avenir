@@ -8,6 +8,10 @@ async function getBenevoleInscriptionsFromLocalSource(benevole_id) {
     return LocalSource.getBenevoleInscriptions(benevole_id);
 }
 
+async function addInscriptionFromLocalSource(inscription) {
+    return LocalSource.addInscription(inscription);
+}
+
 async function getInscriptions() {
     let response = null;
     try {
@@ -30,8 +34,20 @@ async function getBenevoleInscriptions(benevole_id) {
     return response;
 }
 
+async function addInscription(inscription) {
+    let response = null;
+    try {
+        response = await addInscriptionFromLocalSource(evenement);
+    }
+    catch(err) {
+        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur'  }
+    }
+    return response
+}
+
 export default {
     getInscriptions,
     getBenevoleInscriptions,
+    addInscription
 }
 

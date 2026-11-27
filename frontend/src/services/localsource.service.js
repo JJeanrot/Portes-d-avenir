@@ -24,6 +24,12 @@ function getEvenementsNonValides() {
     return {error: 0, data: evenements.filter(e => !e.valide)};
 }
 
+function addInscription(inscription) {
+    inscriptions.push(inscription);
+    console.log(inscritions);
+    return {error: 0, data: inscription}
+}
+
 function validerEvenement(idEvenement) {
     let evt = evenements.find(e => e.id_evenement === Number(idEvenement));
     if (evt) {
@@ -53,7 +59,13 @@ function deleteEvenement(evenement) {
 
 export default {
     getAllDepartements, 
+
     getAllBenevoles, 
+
+    getAllInscriptions,
+    getBenevoleInscriptions,
+    addInscription,
+
     getEvenements, 
     getEvenementsNonValides, 
     validerEvenement, 
