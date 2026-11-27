@@ -65,6 +65,9 @@ function inscrire() {
       <router-link v-if="!evenement.valide" :to="{ name: 'validerEvenement', params: { id: evenement.id_evenement } }">
         <button class="btn-valider">VALIDER</button>
       </router-link>
+      <router-link :to="{ name: 'editEvenement', params: { id: evenement.id_evenement } }">
+        <button class="btn-modifier">MODIFIER</button>
+      </router-link>
       <router-link :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }">
         <button class="btn-supprimer">SUPPRIMER</button>
       </router-link>
@@ -162,6 +165,23 @@ function inscrire() {
 
 .btn-valider:hover {
   background-color: #15803d;
+}
+
+.btn-modifier {
+  flex: 1;
+  background-color: #d97706;
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.btn-modifier:hover {
+  background-color: #b45309;
 }
 
 .btn-supprimer {
