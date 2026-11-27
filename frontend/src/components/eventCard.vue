@@ -37,7 +37,7 @@ function valider() {
 
 function inscrire() {
   const inscription = {
-    "benevole_id": 1,
+    "benevole_id": Number(settings.selectedBenevoleId),
     "evenement_id": props.evenement.id_evenement
   }
   inscriptionStore.addInscription(inscription); 
