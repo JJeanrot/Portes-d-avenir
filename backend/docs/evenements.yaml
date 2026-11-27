@@ -51,6 +51,27 @@ paths:
                   $ref: './openapi.yaml#/components/schemas/Evenement'
 
   /event/{id}:
+    put:
+      tags:
+        - Événements
+      summary: Modifier un événement
+      description: Modifie les informations d'un événement par son identifiant unique.
+      parameters:
+        - $ref: './openapi.yaml#/components/parameters/EventId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: './openapi.yaml#/components/schemas/UpdateEventInput'
+      responses:
+        '200':
+          description: Événement modifié avec succès.
+          content:
+            application/json:
+              schema:
+                $ref: './openapi.yaml#/components/schemas/EvenementModifie'
+
     delete:
       tags:
         - Événements

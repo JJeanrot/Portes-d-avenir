@@ -207,6 +207,41 @@ components:
       required:
         - message
 
+    UpdateEventInput:
+      type: object
+      properties:
+        nom:
+          type: string
+          maxLength: 255
+          example: Journée Portes Ouvertes Informatique
+        image:
+          type: string
+          nullable: true
+          maxLength: 255
+          example: jpo_informatique.jpg
+        date_event:
+          type: string
+          format: date-time
+          example: '2026-12-05T09:00:00'
+        departement_id:
+          type: integer
+          example: 1
+        valide:
+          type: boolean
+          example: true
+
+    EvenementModifie:
+      type: object
+      properties:
+        message:
+          type: string
+          example: Événement modifié avec succès.
+        affectedRows:
+          type: integer
+          example: 1
+      required:
+        - message
+
 
     # ---------- Autres tables (prêtes pour de futures routes) ----------
     Salle:

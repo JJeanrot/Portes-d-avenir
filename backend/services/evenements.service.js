@@ -43,6 +43,23 @@ async function delEvent(idEvent) {
     }
 }
 
+async function updateEvent(idEvent, eventData) {
+    try {
+        const nom = eventData.nom_evenements || eventData.nom_evenement || eventData.nom;
+        const image = eventData.image_evenements || eventData.image || null;
+        const departement_id = eventData.departement_id || eventData.id_departement;
+        const dateSource = eventData.date_evenements || eventData.date_event;
+        const formattedDate = dateSource
+            ? new Date(dateSource).toISOString().slice(0, 19).replace('T', ' ')
+            : null;
+        const valide = eventData.valide ? true : false;
+        const query = "UPDATE evenement SET nom = ?, image = ?, date_event = ?, departement_id = ?, valide = ? WHERE id_evenement = ?";
+        return await pool.query(query, [nom, image, formattedDate, departement_id, valide, idEvent]);
+    } catch (err) {
+        throw err;
+    }
+}
+
 async function createEvent(eventData) {
     try {
         const nom = eventData.nom_evenements || eventData.nom_evenement || eventData.nom;
@@ -91,4 +108,4 @@ async function delDepartement(idDept) {
     }
 }
 
-module.exports = { getEvenements, getEvenementsNonValides, validerEvenement, delEvent, createEvent, getDepartements, createDepartement, delDepartement };
+module.exports = { getEvenements, getEvenementsNonValides, validerEvenement, delEvent, createEvent, updateEvent, getDepartements, createDepartement, delDepartement };

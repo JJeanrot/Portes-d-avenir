@@ -70,6 +70,16 @@ export const useEvenementsStore = defineStore("evenement", () => {
         }
     }
 
+    async function updateEvenement(evenement) {
+        let response = await EvenementsService.updateEvenement(evenement);
+        if (response.error !== 0) {
+            console.log(response.data);
+        } else {
+            await getEvenements();
+            await getEvenementsNonValides();
+        }
+    }
+
     return { 
         evenements, 
         evenementsNonValides, 
@@ -79,6 +89,7 @@ export const useEvenementsStore = defineStore("evenement", () => {
         validerEvenement, 
         getLowestAvailableEvenementId, 
         addEvenement, 
-        deleteEvenement 
+        deleteEvenement,
+        updateEvenement
     };
 });

@@ -107,6 +107,20 @@ async function deleteEvenement(evenement) {
     return response;
 }
 
-export default { getEvenements, getEvenementsNonValides, validerEvenement, getLowestAvailableEvenementId, addEvenement, deleteEvenement }
+async function updateEvenementFromLocalSource(evenement) {
+    return LocalSource.updateEvenement(evenement);
+}
+
+async function updateEvenement(evenement) {
+    let response = null;
+    try {
+        response = await updateEvenementFromLocalSource(evenement);
+    } catch(err) {
+        response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur' };
+    }
+    return response;
+}
+
+export default { getEvenements, getEvenementsNonValides, validerEvenement, getLowestAvailableEvenementId, addEvenement, deleteEvenement, updateEvenement }
 
 

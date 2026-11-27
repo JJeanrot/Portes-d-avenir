@@ -1,4 +1,4 @@
-import { departements, evenements, benevoles, inscriptions } from "@/datasource/data.js"
+import { departements, evenements } from "@/datasource/data.js"
 
 function getAllDepartements() {
     return {error: 0, data: departements};
@@ -57,18 +57,26 @@ function deleteEvenement(evenement) {
     return {error: 0, data: evenement}
 }
 
-export default {
-    getAllDepartements, 
+function updateEvenement(evenement) {
+    let evt = evenements.find(e => e.id_evenement === Number(evenement.id_evenement));
+    if (evt) {
+        if (evenement.nom !== undefined) evt.nom = evenement.nom;
+        if (evenement.nom_evenement !== undefined) evt.nom = evenement.nom_evenement;
+        if (evenement.image !== undefined) evt.image = evenement.image;
+        if (evenement.date_event !== undefined) evt.date_event = evenement.date_event;
+        if (evenement.departement_id !== undefined) evt.departement_id = Number(evenement.departement_id);
+        if (evenement.valide !== undefined) evt.valide = Boolean(evenement.valide);
+        return {error: 0, data: evt};
+    }
+    return {error: 1, status: 404, data: 'Événement non trouvé'};
+}
 
-    getAllBenevoles, 
+export default {
+    getAllBenevoles,
 
     getAllInscriptions,
     getBenevoleInscriptions,
     addInscription,
 
-    getEvenements, 
-    getEvenementsNonValides, 
-    validerEvenement, 
-    addEvenement, 
-    deleteEvenement
+    getAllDepartements, getEvenements, getEvenementsNonValides, validerEvenement, addEvenement, deleteEvenement, updateEvenement
 }

@@ -6,6 +6,7 @@ const router = express.Router();
 router.get('/', controleur.getEvenements);
 router.get('/non-valides', controleur.getEvenementsNonValides);
 router.post('/', controleur.createEvent);
+router.put('/:id', controleur.updateEvent);
 router.patch('/:id/valider', controleur.validerEvenement);
 router.delete('/:id', controleur.delEvent);
 router.get('/departement', controleur.getDepartements);

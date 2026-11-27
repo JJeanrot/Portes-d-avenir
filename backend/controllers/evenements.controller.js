@@ -76,6 +76,17 @@ function validerEvenement(req, res, next) {
         .catch(next);
 }
 
-module.exports = {getEvenements, getEvenementsNonValides, validerEvenement, createEvent, delEvent, getDepartements, createDepartement, delDepartement};
+function updateEvent(req, res, next) {
+    const { id } = req.params;
+
+    service.updateEvent(id, req.body)
+        .then((result) => res.json({
+            message: "Événement modifié",
+            affectedRows: Number(result.affectedRows)
+        }))
+        .catch(next);
+}
+
+module.exports = {getEvenements, getEvenementsNonValides, validerEvenement, createEvent, updateEvent, delEvent, getDepartements, createDepartement, delDepartement};
 
 

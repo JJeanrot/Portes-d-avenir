@@ -27,6 +27,12 @@ const routes = [
         props: true
     },
     {
+        path: '/event/edit/:id',
+        name: 'editEvenement',
+        component: () => import('@/views/eventEditView.vue'),
+        props: true
+    },
+    {
         path: '/event/delete/:id',
         name: 'deleteEvenement',
         component: () => import('@/views/eventDeletePage.vue'),
