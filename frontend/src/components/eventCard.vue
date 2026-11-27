@@ -6,6 +6,7 @@
 
 import {computed} from "vue";
 import {useEvenementsStore} from "@/stores/evenements.js";
+import {useBenevoleStore} from "@/stores/benevole.js";
 
 import {useSettingsStore} from "@/stores/settings.js";
 
@@ -16,6 +17,7 @@ const props = defineProps({
   }
 });
 
+const benevoleStore = useBenevoleStore();
 const settings = useSettingsStore();
 
 const dateFormatee = computed(() => {
@@ -33,6 +35,10 @@ const imageUrl = computed(() => `/images/${props.evenement.image}`);
 
 function valider() {
   evenementsStore.validerEvenement(props.evenement);
+}
+
+function inscrire() {
+  
 }
 </script>
 
@@ -55,6 +61,9 @@ function valider() {
       <router-link :to="{ name: 'deleteEvenement', params: { id: evenement.id_evenement } }">
         <button class="btn-supprimer">SUPPRIMER</button>
       </router-link>
+    </div>
+    <div v-if="settings.selecctedRole == 'Benevole'" class="carte-actions">
+      <
     </div>
   </article>
 </template>
