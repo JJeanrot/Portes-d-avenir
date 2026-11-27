@@ -49,12 +49,12 @@ onMounted(() => {
           <option value="Benevole">Bénévole</option>
           <option value="Mega_organisateur">Méga-Organisateur</option>
         </select>
-        <div v-if="settings.selectedRole == 'Benevole'">
+        <div v-if="settings.selectedRole == 'Benevole'" class="benevole-picker">
           <label for="benevole-select" class="benevole-label">Benevole_id :</label>
           <select id="benevole-select" v-model="settings.selectedBenevoleId" class="benevole-select">
-            <option value=1>1</option>
-            <option value=2>2</option>
-            <option value=3>3</option>
+            <option :value="1">1</option>
+            <option :value="2">2</option>
+            <option :value="3">3</option>
           </select>
         </div>
       </div>
@@ -170,6 +170,29 @@ onMounted(() => {
 
 .role-select:focus {
   border-color: #2563eb;
+}
+
+.benevole-picker {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.benevole-label {
+  margin: 0;
+  white-space: nowrap;
+}
+
+.benevole-select {
+  width: auto;
+  min-width: 3.5rem;
+  padding: 0.4rem 1.8rem 0.4rem 0.65rem;
+  border-radius: 6px;
+  border: 1px solid #d1d5db;
+  background-color: #ffffff;
+  color: #374151;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
 
 .main-content {
