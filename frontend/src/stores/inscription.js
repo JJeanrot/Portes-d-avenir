@@ -17,5 +17,14 @@ export const useInscriptionStore = defineStore("inscription", () => {
         }
     }
 
+    async function addInscription(inscription) {
+        let response = await InscriptionsService.addEvenement(inscription);
+        if (response.error !== 0) {
+            console.log(response.data);
+        } else {
+            await getInscriptions();
+        }
+    }
+
     return { inscriptions, getInscriptions }
 });
