@@ -9,6 +9,17 @@ function getEvenements(req,res,next) {
         .catch(next)
 }
 
+function getEvenementById(req, res, next) {
+    service.findEvenementById(req.params.id)
+        .then((evenement) => {
+            if (!evenement) {
+                return res.status(404).json({ message: "Événement introuvable" });
+            }
+            res.json(evenement);
+        })
+        .catch(next);
+}
+
 function createEvent(req, res, next) {
     service.createEvent(req.body)
         .then((result) => {
@@ -87,6 +98,4 @@ function updateEvent(req, res, next) {
         .catch(next);
 }
 
-module.exports = {getEvenements, getEvenementsNonValides, validerEvenement, createEvent, updateEvent, delEvent, getDepartements, createDepartement, delDepartement};
-
-
+module.exports = {getEvenements, getEvenementById, getEvenementsNonValides, validerEvenement, createEvent, updateEvent, delEvent, getDepartements, createDepartement, delDepartement};

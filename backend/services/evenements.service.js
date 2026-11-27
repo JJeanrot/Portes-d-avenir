@@ -16,6 +16,15 @@ async function getEvenements(){
     }
 }
 
+async function findEvenementById(idEvent) {
+    try {
+        const evenements = await pool.query(COLLUMN + " WHERE e.valide = 1 AND e.id_evenement = ?", [idEvent]);
+        return evenements[0] || null;
+    } catch (err) {
+        throw err;
+    }
+}
+
 // return all events that are not validated yet
 async function getEvenementsNonValides(){
     try{
@@ -108,4 +117,4 @@ async function delDepartement(idDept) {
     }
 }
 
-module.exports = { getEvenements, getEvenementsNonValides, validerEvenement, delEvent, createEvent, updateEvent, getDepartements, createDepartement, delDepartement };
+module.exports = { getEvenements, findEvenementById, getEvenementsNonValides, validerEvenement, delEvent, createEvent, updateEvent, getDepartements, createDepartement, delDepartement };

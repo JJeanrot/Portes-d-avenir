@@ -12,5 +12,6 @@ router.delete('/:id', controleur.delEvent);
 router.get('/departement', controleur.getDepartements);
 router.post('/departement', controleur.createDepartement);
 router.delete('/departement/:id', controleur.delDepartement);
+router.get('/:id', controleur.getEvenementById);
 
 module.exports = router;
