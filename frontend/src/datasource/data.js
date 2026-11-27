@@ -85,8 +85,16 @@ let benevoles = [
     }
 ];
 
+let inscriptions = [
+    {
+        "benevole_id" : 1,
+        "evenement_id" : 1
+    }
+];
+
 export {
     departements,
     evenements,
-    benevoles
+    benevoles,
+    inscriptions
 }

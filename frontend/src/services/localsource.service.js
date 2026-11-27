@@ -1,4 +1,4 @@
-import { departements, evenements, benevoles } from "@/datasource/data.js"
+import { departements, evenements, benevoles, inscriptions } from "@/datasource/data.js"
 
 function getAllDepartements() {
     return {error: 0, data: departements};
@@ -6,6 +6,14 @@ function getAllDepartements() {
 
 function getAllBenevoles() {
     return {error: 0, data: benevoles};
+}
+
+function getAllInscriptions() {
+    return {error: 0, data: inscriptions};
+}
+
+function getBenevoleInscriptions(idBenevole) {
+    return {error: 0, data: inscriptions.filter(i => i.benevole_id === idBenevole)};
 }
 
 function getEvenements() {
