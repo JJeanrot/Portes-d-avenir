@@ -87,5 +87,6 @@ let benevoles = [
 
 export {
     departements,
-    evenements
+    evenements,
+    benevoles
 }
