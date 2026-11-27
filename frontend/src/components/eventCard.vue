@@ -59,6 +59,13 @@ function inscrire() {
       <span class="departement">{{ evenement.nom_departement }}</span>
       <h3 class="nom">{{ evenement.nom }}</h3>
       <p class="date">{{ dateFormatee }}</p>
+      <router-link
+        class="detail-link"
+        :to="{ name: 'eventDetail', params: { id: evenement.id_evenement } }"
+      >
+        Découvrir l'événement
+        <span aria-hidden="true">→</span>
+      </router-link>
     </div>
 
     <div v-if="settings.selectedRole == 'Mega_organisateur'" class="carte-actions">
@@ -82,30 +89,30 @@ function inscrire() {
 
 <style scoped>
 .carte {
-  width: 300px;
-  max-height: 277px;
-  border-radius: 12px;
+  width: 100%;
+  min-width: 0;
+  height: 100%;
+  border: 1px solid var(--border, #cddcd3);
+  border-radius: 1rem;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  background: var(--surface, #fff);
+  box-shadow: 0 0.35rem 1.1rem rgba(28, 51, 40, 0.08);
   display: flex;
   flex-direction: column;
   position: relative;
-  transform-origin: center center;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
 .carte:hover {
-  transform: scale(1.1);
-  z-index: 10;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  cursor: pointer;
+  transform: translateY(-4px);
+  border-color: var(--green-300, #a7c2b2);
+  box-shadow: 0 0.8rem 1.8rem rgba(28, 51, 40, 0.14);
 }
 
 .carte-image {
   width: 100%;
-  height: 180px;
-  background: #e5e7eb;
+  aspect-ratio: 16 / 9;
+  background: var(--green-100, #e4ede7);
 }
 
 .carte-image img {
@@ -116,38 +123,74 @@ function inscrire() {
 }
 
 .carte-infos {
-  padding: 12px 16px;
+  flex: 1;
+  padding: 1rem 1.1rem 1.15rem;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  align-items: flex-start;
+  gap: 0.45rem;
 }
 
 .departement {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.76rem;
+  font-weight: 700;
   text-transform: uppercase;
-  color: #2563eb;
+  letter-spacing: 0.06em;
+  color: var(--green-600, #3d6f53);
 }
 
 .nom {
   margin: 0;
-  font-size: 1.05rem;
-  color: #111827;
+  color: var(--green-900, #1c3328);
+  font-size: 1.1rem;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .date {
   margin: 0;
   font-size: 0.85rem;
-  color: #6b7280;
+  line-height: 1.45;
+  color: var(--text-muted, #55655c);
+}
+
+.detail-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  margin-top: 0.35rem;
+  color: var(--green-700, #2f5842);
+  font-size: 0.9rem;
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.detail-link:hover {
+  color: var(--green-900, #1c3328);
+  text-decoration: underline;
 }
 
 .carte-actions {
   display: flex;
-  gap: 8px;
-  padding: 10px 16px;
-  background: #fafafa;
-  border-top: 1px solid #f0f0f0;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: var(--green-50, #f2f6f3);
+  border-top: 1px solid var(--border, #cddcd3);
   margin-top: auto;
+}
+
+.carte-actions > a {
+  flex: 1 1 5rem;
+  min-width: 0;
+}
+
+.carte-actions button {
+  width: 100%;
+  min-height: 2.5rem;
+  padding: 0.55rem 0.65rem;
+  font-size: 0.78rem;
 }
 
 .btn-valider {
@@ -199,5 +242,11 @@ function inscrire() {
 
 .btn-supprimer:hover {
   background-color: #b91c1c;
+}
+
+@media (max-width: 38rem) {
+  .carte:hover {
+    transform: none;
+  }
 }
 </style>
