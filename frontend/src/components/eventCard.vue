@@ -1,12 +1,9 @@
-
-
-
-
 <script setup>
 
 import {computed} from "vue";
 import {useEvenementsStore} from "@/stores/evenements.js";
 import {useBenevoleStore} from "@/stores/benevole.js";
+import {useInscriptionStore} from "@/stores/inscription.js";
 
 import {useSettingsStore} from "@/stores/settings.js";
 
@@ -18,6 +15,7 @@ const props = defineProps({
 });
 
 const benevoleStore = useBenevoleStore();
+const inscriptionStore = useInscriptionStore();
 const settings = useSettingsStore();
 
 const dateFormatee = computed(() => {
@@ -38,7 +36,11 @@ function valider() {
 }
 
 function inscrire() {
-  
+  const inscription = {
+    "benevole_id": 1,
+    "evenement_id": props.evenement.id_evenement
+  }
+  inscriptionStore.addInscription(inscription); 
 }
 </script>
 
@@ -62,8 +64,10 @@ function inscrire() {
         <button class="btn-supprimer">SUPPRIMER</button>
       </router-link>
     </div>
-    <div v-if="settings.selecctedRole == 'Benevole'" class="carte-actions">
-      <
+
+
+    <div v-if="settings.selectedRole == 'Benevole'" class="carte-actions">
+        <button @click="inscrire()">S'inscrire</button>
     </div>
   </article>
 </template>

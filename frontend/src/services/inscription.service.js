@@ -37,7 +37,7 @@ async function getBenevoleInscriptions(benevole_id) {
 async function addInscription(inscription) {
     let response = null;
     try {
-        response = await addInscriptionFromLocalSource(evenement);
+        response = await addInscriptionFromLocalSource(inscription);
     }
     catch(err) {
         response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur'  }

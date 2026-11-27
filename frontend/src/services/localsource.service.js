@@ -25,8 +25,8 @@ function getEvenementsNonValides() {
 }
 
 function addInscription(inscription) {
+    console.log(inscriptions);
     inscriptions.push(inscription);
-    console.log(inscritions);
     return {error: 0, data: inscription}
 }
 

@@ -8,7 +8,7 @@ export const useInscriptionStore = defineStore("inscription", () => {
     const inscriptions = ref([]);
 
     async function getInscriptions() {
-        let response = await InscriptionService.getDepartements();
+        let response = await InscriptionService.getInscriptions();
         if (response.error === 0) {
             inscriptions.value = response.data.data;
         }
@@ -18,7 +18,7 @@ export const useInscriptionStore = defineStore("inscription", () => {
     }
 
     async function addInscription(inscription) {
-        let response = await InscriptionsService.addEvenement(inscription);
+        let response = await InscriptionService.addInscription(inscription);
         if (response.error !== 0) {
             console.log(response.data);
         } else {
@@ -26,5 +26,5 @@ export const useInscriptionStore = defineStore("inscription", () => {
         }
     }
 
-    return { inscriptions, getInscriptions }
+    return { inscriptions, getInscriptions, addInscription }
 });
