@@ -1,7 +1,11 @@
-import { departements, evenements } from "@/datasource/data.js"
+import { departements, evenements, benevoles } from "@/datasource/data.js"
 
 function getAllDepartements() {
     return {error: 0, data: departements};
+}
+
+function getAllBenevoles() {
+    return {error: 0, data: benevoles};
 }
 
 function getEvenements() {
@@ -40,5 +44,11 @@ function deleteEvenement(evenement) {
 }
 
 export default {
-    getAllDepartements, getEvenements, getEvenementsNonValides, validerEvenement, addEvenement, deleteEvenement
+    getAllDepartements, 
+    getAllBenevoles, 
+    getEvenements, 
+    getEvenementsNonValides, 
+    validerEvenement, 
+    addEvenement, 
+    deleteEvenement
 }
