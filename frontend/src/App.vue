@@ -46,6 +46,14 @@ onMounted(() => {
           <option value="Benevole">Bénévole</option>
           <option value="Mega_organisateur">Méga-Organisateur</option>
         </select>
+        <div v-if="settings.selectedRole == 'Benevole'">
+          <label for="benevole-select" class="benevole-label">Benevole_id :</label>
+          <select id="benevole-select" v-model="settings.selectedBenevoleId" class="benevole-select">
+            <option value=1>1</option>
+            <option value=2>2</option>
+            <option value=3>3</option>
+          </select>
+        </div>
       </div>
     </header>
 
