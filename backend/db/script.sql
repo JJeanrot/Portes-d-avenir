@@ -17,3 +17,17 @@ create table evenement(
     valide boolean default false,
     foreign key evenement(departement_id) references departement(id_departement)
 );
+
+create table benevole(
+    id_benevole int primary key AUTO_INCREMENT,
+    departement_id int
+    foreign key evenement(departement_id) references departement(id_departement)
+);
+
+create table inscription(
+    benevole_id int primary key,
+    evenement_id int primary key,
+    foreign key benevole(benevole_id) references benevole(id_benevole)
+    foreign key evenement(evenement_id) references evenement(id_evenement)
+);
+
