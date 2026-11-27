@@ -1,7 +1,7 @@
 import LocalSource from "@/services/localsource.service.js";
 
 async function getInscriptionsFromLocalSource() {
-    return LocalSource.getEvenements();
+    return LocalSource.getAllInscriptions();
 }
 
 async function getBenevoleInscriptionsFromLocalSource(benevole_id) {
@@ -15,7 +15,7 @@ async function addInscriptionFromLocalSource(inscription) {
 async function getInscriptions() {
     let response = null;
     try {
-        response = await getEvenementsFromLocalSource()
+        response = await getInscriptionsFromLocalSource()
     }
     catch(err) {
         response = {error: 1, status: 404, data: 'erreur réseau, impossible de se connecter au serveur'  }

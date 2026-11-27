@@ -36,10 +36,15 @@ function valider() {
 }
 
 function inscrire() {
+
+  const benevole_id = Number(settings.selectedBenevoleId);
+  const evenement_id = props.evenement.id_evenement;
+
   const inscription = {
-    "benevole_id": Number(settings.selectedBenevoleId),
-    "evenement_id": props.evenement.id_evenement
+    "benevole_id": benevole_id,
+    "evenement_id": evenement_id
   }
+
   inscriptionStore.addInscription(inscription); 
 }
 </script>

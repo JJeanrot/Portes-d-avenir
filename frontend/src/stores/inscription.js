@@ -10,7 +10,7 @@ export const useInscriptionStore = defineStore("inscription", () => {
     async function getInscriptions() {
         let response = await InscriptionService.getInscriptions();
         if (response.error === 0) {
-            inscriptions.value = response.data.data;
+            inscriptions.value = response.data;
         }
         else {
             console.log(response.data);

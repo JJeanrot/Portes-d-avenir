@@ -1,15 +1,18 @@
 <script setup>
 import { onMounted } from "vue";
 import { useDepartementStore } from "@/stores/departement.js";
+import { useInscriptionStore } from "@/stores/inscription.js";
 import { useEvenementsStore } from "@/stores/evenements.js";
 import { useSettingsStore } from "@/stores/settings.js";
 
 const departementStore = useDepartementStore();
 const evenementsStore = useEvenementsStore();
+const inscriptionStore = useInscriptionStore();
 const settings = useSettingsStore();
 
 onMounted(() => {
     departementStore.getDepartements();
+    inscriptionStore.getInscriptions();
     evenementsStore.getEvenements();
     evenementsStore.getEvenementsNonValides();
     evenementsStore.getLowestAvailableEvenementId();
